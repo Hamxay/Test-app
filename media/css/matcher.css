@@ -1,0 +1,129 @@
+body {
+background-image: url('/media/romantic.gif');
+background-size: 100% 600%;
+background-position: center;
+background-repeat: no-repeat;
+background-color: #f0f0f0;
+}
+
+.flex-container{
+ display: flex;
+justify-content: space-between;
+}
+
+.custom-table {
+background-color: white;
+width: 140%;
+margin: 20px -20px;
+font-size: 12px;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.custom-table thead {
+background-color: lightgrey;
+color: black;
+}
+
+.custom-table th,
+.custom-table td {
+padding: 15px;
+border-bottom: 1px solid #ddd;
+}
+
+.custom-table tbody tr:hover {
+background-color: #f5f5f5;
+}
+
+.custom-table tbody td {
+color: #333;
+}
+
+.custom-table tbody td:last-child {
+text-align: center;
+}
+
+.styled-select {
+margin-right: 50px;
+position: relative;
+margin-bottom: 20px;
+background-color: #ffffff;
+padding: 10px;
+border-radius: 5px;
+}
+
+.styled-select label {
+display: block;
+margin-bottom: -21px;
+font-weight: bold;
+font-size: 14px;
+}
+
+.styled-select select {
+appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+width: 400px;
+padding: 10px;
+font-size: 16px;
+border: 1px solid #ddd;
+border-radius: 5px;
+background-color: #fff;
+cursor: pointer;
+}
+
+.styled-select select:focus {
+outline: none;
+}
+
+
+
+.refresh_select{
+background-color: rgb(255 24 24);
+color: #fff;
+border: none;
+padding: 10px 15px;
+border-radius: 4px;
+cursor: pointer;
+font-size: 12px;
+transition: background-color 0.3s;
+margin-top: 33px;
+font-weight: 600;
+}
+
+.submit_crush{
+    background-color: rgb(255 24 24);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s;
+    margin-top: 7px;
+    font-weight: 600;
+    margin-left: 4%;
+    }
+    
+
+
+.fname-input, .sname-input, .email-input {
+    width: 40%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: lightgray;
+}
+
+
+.loader-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

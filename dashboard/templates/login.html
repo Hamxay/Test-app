@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('/media/romantic.gif');
+            background-size: 100% 330%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f0f0f0;
+        }
+
+        .login-container {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            width: auto;
+            max-width: 500px;
+            text-align: center;
+            margin: auto;
+        }
+
+        .login-container h2 {
+            margin: 0 0 40px 0;
+            color: #333;
+            font-size: 35px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 30px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-bottom: 15px;
+
+        }
+
+        .email-info {
+            color: #65359c;
+            margin-bottom: 15px;
+
+        }
+
+        #wrong-code {
+            color: #ff0000;
+            margin-bottom: 15px;
+
+        }
+
+
+
+        .login-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .login-button,
+        .verify-button {
+            background-color: #388087;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+
+
+        .login-button:hover,
+        .verify-button:hover {
+            background-color: #388087;
+        }
+
+        input:required {
+            border: 1px solid #ccc;
+        }
+
+        .sction {
+            padding: 0 20px;
+        }
+
+        .sction .wrrpr {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .sction .wrrpr h1 {
+            font-size: 3em;
+            color: rgb(255 24 24);
+            font-weight: bold;
+        }
+
+        /* responsive css */
+
+        @media only screen and (max-width: 575px) {
+            .sction .wrrpr h1 {
+                font-size: 30px;
+
+            }
+
+            .login-container h2 {
+                font-size: 25px;
+            }
+
+            .login-container {
+                padding: 40px 20px;
+            }
+
+            .sction .wrrpr {
+                margin-bottom: 50px;
+            }
+        }
+
+        /* responsive css end */
+    </style>
+</head>
+
+<body>
+
+    <div class="sction">
+
+        <div class="wrrpr">
+            <h1>ST ANDREWS CUPID</h1>
+        </div>
+        <div class="login-container">
+            <h2>Login to CrushApp</h2>
+
+
+            <p class="error-message" id="error-message">User Does Not Exist</p>
+            <p id="wrong-code">Wrong Code</p>
+
+            <input type="email" class="login-input" id="email" placeholder="Email">
+            <input type="hidden" class="val_code">
+
+            <input type="text" class="login-input verification-code-input" id="verification-code"
+                placeholder="Verification Code">
+
+            <!-- Login and Verify Buttons -->
+            <div class="login-buttons">
+                <button class="login-button" onclick="showVerificationCode()">Sign In</button>
+                <button class="verify-button" onclick="verifyCode()">Verify</button>
+            </div>
+
+            <p class="email-info" id="email-info">check spam/junk folder if email not found, it may take a couple
+                minutes</p>
+        </div>
+    </div>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $(".error-message").hide();
+            $('.verification-code-input').hide();
+            $('.verify-button').hide()
+            $('#wrong-code').hide();
+            $('#email-info').hide();
+
+        });
+
+
+
+        function showVerificationCode() {
+        $(".error-message").hide();
+        var email = document.getElementById('email').value;
+        if (email.trim() === '') {
+            $('.login-input').css('border', '1px solid red');
+            return;
+        }
+        else{
+            $.ajax({
+                url: "/dashboard/login",
+                method: "Post",
+                data: {
+                        email: email,
+                        
+                    },
+                success: function(response){
+                   if (response.messages){
+                    $(".error-message").html(response.messages);
+                    $(".error-message").show();
+                    return false
+                   }
+                    if (response.user === 0)
+                     {
+                        $(".error-message").html('User Does Not Exist')
+                        $(".error-message").show();
+                     } 
+                     else 
+                     {
+                            verify_code=response.code
+                            $('.val_code').val(verify_code)
+                        
+
+                        $('.login-input').css('border', '1px solid black');
+                        $(".error-message").hide();
+                        $('.login-button').hide();
+                        $('.verify-button').show();
+                        $('.verification-code-input').show();   
+                        $('#email-info').show();        
+                        
+                      }
+                }
+            });
+        }
+
+    }
+
+        function verifyCode() {
+
+            $('.verification-code-input').css('border', '1px solid black');
+            $('#wrong-code').hide();
+            real_code = $('.val_code').val();
+            user_code = $('.verification-code-input').val();
+
+            if (user_code.trim() === '') {
+                $('.verification-code-input').css('border', '1px solid red');
+                return;
+            }
+
+            else if (real_code == user_code) {
+                useremail = $('.login-input').val();
+                $.ajax({
+                    url: "/dashboard/createsession",
+                    method: "Post",
+                    data: {
+                        'createsession': 1,
+                        'useremail': useremail,
+
+                    },
+                    success: function (response) {
+
+                        if (response.session === 1) {
+
+                            window.location.href = "/dashboard/matcherview";
+                        }
+                        else {
+                            window.location.href = "/dashboard/login";
+                        }
+                    }
+
+                })
+            }
+            else {
+                $('#wrong-code').show();
+
+            }
+        }
+    </script>
+
+</body>
+
+</html>

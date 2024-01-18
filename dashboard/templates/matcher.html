@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crushes Form</title>
+
+  <link rel="stylesheet" href="/media/css/matcher.css">
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+
+    }
+
+    .sccctionn {
+      padding: 50px 20px;
+      overflow: hidden;
+    }
+
+    .sccctionn .wrrpr {
+      margin: 0;
+    }
+
+    .sccctionn .wrrpr h1 {
+      font-size: 3em;
+      color: rgb(255 24 24);
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .sccctionn .wrrpr h3 {
+      color: #000000;
+      text-align: center;
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .sccctionn .wrrpr h3 .mail {
+      font-style: italic;
+      text-decoration: underline;
+    }
+
+    .sccctionn .wrrpr h3 .txtx {
+      color: #388087;
+    }
+
+    .h3_wrrp {
+      background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: fit-content;
+    margin-bottom: 30px;
+    display: block;
+    margin: 0 auto 30px;
+    }
+    
+
+    .sccctionn .custom-table {
+      width: 100% !important;
+      margin: 0 !important;
+    }
+
+    .sccctionn .styled-select {
+      padding: 20px 20px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .sccctionn .styled-select .hide {
+      display: none;
+    }
+
+    .sccctionn .refresh_select {
+      margin: 0 !important;
+      text-wrap: nowrap;
+      background-color: #388087 !important;
+    }
+
+    .sccctionn .select2-container .select2-selection--single,
+    .sccctionn .select2-container--default .select2-selection--single .select2-selection__arrow {
+      height: 40px !important;
+    }
+
+    .sccctionn .select2-container--default .select2-selection--single .select2-selection__rendered {
+      line-height: 38px !important;
+    }
+
+    .tble_wrrpr {
+      overflow: auto;
+    }
+
+    .tble_wrrpr table {
+      min-width: 400px;
+    }
+
+    .crush-input {
+      padding: 30px 20px;
+    }
+
+    .fname-input,
+    .sname-input,
+    .email-input {
+      width: 100% !important;
+    }
+
+    .submit_crush {
+      margin-left: 0 !important;
+      background-color: #388087 !important;
+      margin-bottom: 10px;
+    }
+
+    @media only screen and (max-width: 991px) {
+
+      .sccctionn .styled-select,
+      .crush-input {
+        margin-bottom: 30px !important;
+      }
+    }
+
+    @media only screen and (max-width: 575px) {
+      .sccctionn .wrrpr h1 {
+        font-size: 30px;
+        margin-bottom: 30px;
+      }
+
+      .sccctionn .wrrpr h3 {
+        font-size: 16px;
+      }
+
+      .h3_wrrp,
+      .sccctionn .styled-select {
+        padding: 20px;
+      }
+
+      .sccctionn .styled-select {
+        gap: 5px;
+      }
+
+      .sccctionn {
+        padding: 30px 10px;
+      }
+    }
+
+    @media only screen and (max-width: 500px) {
+
+      .sccctionn .styled-select {
+        display: block;
+      }
+
+      .sccctionn .refresh_select {
+        margin-top: 10px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="loader-container" id="loaderContainer">
+    <img src="/media/blac.gif" alt="Loader" height="100px" width="100px">
+  </div>
+
+
+  <div class="sccctionn">
+    <div class="row">
+      <div class="col-12">
+        <div class="wrrpr">
+          <h1>ST ANDREWS CUPID</h1>
+          <div class="h3_wrrp">
+            <h3>Signed in as <span class="mail">{{user_email}}</span>,
+              <span class="txtx">
+
+                {% if crushed_count == 0 %}{{crushed_count}} People have crushed on you {% endif %}
+                {% if crushed_count == 1 %}{{crushed_count}} Person has a crush on you {% endif %}
+                {% if crushed_count > 1 %}{{crushed_count}} People have crushed on you {% endif %}
+
+
+
+
+              </span>
+            </h3>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-12 col-lg-5">
+        <div>
+
+          <div class="styled-select" style="margin: 0;">
+            <label for="mySelect" class="hide">Select an option:</label>
+            <!-- <select id="mySelect" name="mySelect" class="select2">
+
+              {% for contacts in all_contacts %}
+                <option value="{{contacts.email}}">{{contacts.name}} -- {{contacts.email|slice:":30"}}</option>
+              {% endfor %}
+            </select> -->
+            <select id="mySelect" name="mySelect" class="select2" style="width: 100% !important;"></select>
+
+            <button class="refresh_select" onclick="refreshselect()">Find Crush</button>
+
+          </div>
+
+
+
+          <div class="crush-input"
+            style="display: none;background-color: #ffffff; border-radius: 10px;height: auto; width: 100%;">
+            <input type="text" class="fname-input" id="fname-input" placeholder="Crush First Name">
+            <input type="text" class="sname-input" id="sname-input" placeholder="Crush Last Name">
+            <input type="text" class="email-input" id="email-input" placeholder="Crush Email">
+
+            <button class="submit_crush" id="submit_crush" onclick="submitcrush()">Submit Crush</button>
+            <h3 class="congrats"
+              style="font-size: 20px; text-align: center; color:#388087; font-weight: bold;display: none;">Congrats, you
+              have
+              a match</h3>
+            <h3 class="dbadded"
+              style="font-size: 20px; text-align: center; color:#388087; font-weight: bold;display: none;">Data Added to
+              DataBase and CSV</h3>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-7 col-md-12">
+        <div class="tble_wrrpr">
+          <table class="custom-table table-striped">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Crush Name</th>
+                <th>Crush Email</th>
+                <th>Match</th>
+
+              </tr>
+            </thead>
+            <tbody>
+
+              {% for table in login_crush_table_list %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{table.crush_name}}</td>
+                <td>{{table.crush_email|slice:":30"}}</td>
+                <td>{{table.matched}}</td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <script>
+
+    $(document).ready(function () {
+      // $('#mySelect').select2();
+      $('#mySelect').select2({
+        ajax: {
+          url: '/dashboard/results',
+          dataType: 'json',
+          delay: 250,
+          data: function (params) {
+            return {
+              q: params.term,
+              // page: params.page
+            };
+          },
+          processResults: function (data, params) {
+            // process and return the data
+            return {
+              results: data.items,
+              pagination: {
+                more: false  // Since we're not implementing pagination in this example
+              }
+            };
+          },
+          cache: true
+        },
+        placeholder: 'Search for something...',
+        minimumInputLength: 1
+      });
+
+
+    });
+
+
+    function refreshselect() {
+      var dropdownselect = $('#mySelect').val();
+
+      // var dropdownselect = document.getElementById('mySelect').value;
+      if (dropdownselect.trim() === '') {
+        return;
+      }
+
+      else {
+        $.ajax({
+          url: "/dashboard/matcherview",
+          method: "Post",
+          data: {
+            'dropdownselectemail': dropdownselect,
+
+          },
+          success: function (response) {
+
+            fname = response.fname
+            sname = response.sname
+            email = response.email
+            $('.fname-input').val(response.fname);
+            $('.sname-input').val(response.sname);
+            $('.email-input').val(response.email);
+
+            $('.styled-select').hide();
+            $('.crush-input').show();
+
+          }
+        });
+      }
+
+    }
+
+
+
+    function submitcrush() {
+
+
+      var fname = document.getElementById('fname-input').value;
+      var sname = document.getElementById('sname-input').value;
+      var emmaiil = document.getElementById('email-input').value;
+
+      if (fname.trim() === '') {
+        $('#fname-input').css('border', '1px solid red');
+        return;
+      } else {
+        $('#fname-input').css('border', ''); // Reset border if it was set previously
+      }
+
+      if (sname.trim() === '') {
+        $('#sname-input').css('border', '1px solid red');
+        return;
+      } else {
+        $('#sname-input').css('border', ''); // Reset border if it was set previously
+      }
+
+      if (emmaiil.trim() === '') {
+        $('#email-input').css('border', '1px solid red');
+        return;
+      } else {
+        $('#email-input').css('border', ''); // Reset border if it was set previously
+      }
+      var submit_crush = document.getElementById('submit_crush');
+      submit_crush.disabled = true;
+      submit_crush.style.opacity = 0.5;
+      $('.loader-container').show()
+      $.ajax({
+
+        url: "/dashboard/checkformatch",
+        method: "POST", // "Post" should be in uppercase
+        data: {
+          'fname': fname,
+          'sname': sname,
+          'emmaiil': emmaiil
+        },
+        success: function (response) {
+          submit_crush.disabled = false;
+          submit_crush.style.opacity = 1;
+          $('.loader-container').hide()
+
+          congrats = response.congrats
+          if (congrats == 'yes') {
+            $('.congrats').show();
+            $('.dbadded').show()
+          }
+          else {
+            $('.dbadded').show()
+          }
+
+          setTimeout(function () {
+            location.reload();
+          }, 4000);
+
+        }
+      });
+    }
+
+
+
+  </script>
+
+</body>
+
+</html>
