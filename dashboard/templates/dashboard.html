@@ -1,0 +1,137 @@
+<html>
+
+<head>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-image: url('/media/romantic.gif');
+      background-size: 100% 220%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #f0f0f0;
+
+    }
+
+    .container {
+
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 50px;
+      width: auto;
+      max-width: 800px;
+      text-align: center;
+      margin: auto;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #333;
+      margin: 0 0 40px 0;
+    }
+
+    input[type="button"] {
+      background-color: #388087;
+      color: #fff;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s;
+    }
+
+    input[type="button"]:hover {
+      background-color: #388087;
+    }
+
+    .sction {
+      padding: 50px 20px 0;
+    }
+
+    .sction .wrrpr {
+      text-align: center;
+      margin-bottom: 100px;
+    }
+
+    .sction .wrrpr h1 {
+      font-size: 3em;
+      color: rgb(255 24 24);
+      font-weight: bold;
+    }
+
+    /* responsive css */
+
+    @media only screen and (max-width: 767px) {
+      .sction input[type="button"] {
+        padding: 20px 40px !important;
+        font-size: 25px !important;
+      }
+
+    }
+
+    @media only screen and (max-width: 575px) {
+      .sction .wrrpr h1 {
+        font-size: 30px !important;
+      }
+
+    }
+
+    @media only screen and (max-width: 475px) {
+      .sction input[type="button"] {
+        padding: 20px 40px;
+        font-size: 30px;
+      }
+
+    }
+
+    /* responsive css end */
+  </style>
+</head>
+<div class="sction">
+  <div class="container-fluid">
+
+    <div class="wrrpr">
+      <h1>ST ANDREWS CUPID</h1>
+    </div>
+    <div class="row">
+
+      <div class="container">
+
+        <p>Enter your email address to receive a one-time
+          log in code. Check your junk/spam email folders
+          and enter the code in the text box
+          The code may take a litte while to send so
+          don't panic!
+          Add a crush by entering their name in the
+          search bar. Click the reload icon to autofill
+          a name.
+          You will see your inputted crush appear in
+          your crush table and whether they have
+          matched with you yet.
+          Happy crushing ;) and don't forget to share
+          with your friends </p>
+        <input type="button" class="enterapp" value="Enter App">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $(document).on("click", ".enterapp", function () {
+    window.location.href = "/dashboard/login";
+  });
+</script>
+
+
+</html>
